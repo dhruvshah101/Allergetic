@@ -99,7 +99,6 @@ allergetic/
 ├── requirements.txt        # Python dependencies
 ├── test_app.py             # Backend tests
 ├── README.md
-├── .gitignore
 ├── templates/
 │   ├── base.html           # Shared page layout
 │   ├── index.html          # Record form and saved card
