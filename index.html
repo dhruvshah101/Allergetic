@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero"><div><p class="eyebrow"><span></span> YOUR PERSONAL ALLERGY DOCKET</p><h1>Your allergies.<br><em>Clearly communicated.</em></h1><p class="hero-description">Keep the details in one place. Create a simple allergy record you can bring to an appointment or show during a conversation.</p></div><div class="hero-note"><span aria-hidden="true">↗</span><p>A record made<br>to be understood.</p></div></section>
+<div class="workspace" id="record">
+  <section class="editor-panel" aria-labelledby="form-heading">
+    <div class="panel-heading"><div><p class="eyebrow">01 / YOUR INFORMATION</p><h2 id="form-heading">{% if profile %}Update your record{% else %}Let’s start with you{% endif %}</h2></div><span class="step-icon" aria-hidden="true">↘</span></div>
+    {% for message in get_flashed_messages() %}<div class="notice success" role="status">{{ message }}</div>{% endfor %}
+    {% if errors %}<div class="notice error" role="alert" tabindex="-1" id="form-errors"><strong>Please check your record.</strong><ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul></div>{% endif %}
+    <form method="post" id="record-form">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <label for="name">Your name <span class="required">(required)</span></label><input id="name" name="name" value="{{ draft.name }}" placeholder="Enter your name" required maxlength="80" autocomplete="name">
+      <fieldset class="status-fieldset"><legend>Do you have any known allergies?</legend><div class="status-options">
+        {% for value, label in [('yes', 'Yes, I do'), ('no', 'None known'), ('unsure', 'I’m unsure')] %}<label class="status-option"><input type="radio" name="status" value="{{ value }}" {% if draft.status == value %}checked{% endif %} required><span>{{ label }}</span></label>{% endfor %}
+      </div><p class="field-help">Choose what you know today. You can update this later.</p></fieldset>
+      <section id="allergies-section" aria-labelledby="allergies-heading"><div class="entry-heading"><h3 id="allergies-heading">Your allergies</h3><span>One allergen per entry</span></div>
+        <div id="allergy-entries">{% for entry in draft.allergies or [{'allergen': '', 'reaction': ''}] %}<div class="allergy-entry"><div class="entry-top"><span class="entry-number">ALLERGY {{ loop.index }}</span><button type="button" class="remove-entry text-button" aria-label="Remove allergy {{ loop.index }}">Remove</button></div><label for="allergen-{{ loop.index }}">Allergen</label><input id="allergen-{{ loop.index }}" name="allergen" value="{{ entry.allergen }}" placeholder="e.g. Peanuts" maxlength="100"><label for="reaction-{{ loop.index }}">Reaction notes <span class="optional">optional</span></label><input id="reaction-{{ loop.index }}" name="reaction" value="{{ entry.reaction }}" placeholder="Describe a reaction you experienced" maxlength="300"></div>{% endfor %}</div>
+        <button type="button" id="add-allergy" class="add-button">+ Add another allergy</button><p id="entry-announcement" class="sr-only" role="status"></p>
+      </section>
+      <div class="form-footer"><p>All entries are self-reported. Saving updates the single record stored on this computer.</p><button class="button primary" type="submit">Save my record <span aria-hidden="true">↗</span></button></div>
+      <noscript><p>Enable JavaScript to add multiple entries. You can still save a single allergy using this form.</p></noscript>
+    </form>
+  </section>
+  <aside class="preview-panel" id="saved-card" aria-labelledby="preview-heading"><div class="preview-heading"><p class="eyebrow">02 / YOUR ALLERGY CARD</p><span>{% if profile %}Saved record{% else %}Preview{% endif %}</span></div><h2 id="preview-heading" class="sr-only">Your saved allergy card</h2>{% include '_card.html' %}
+    {% if profile %}<div class="card-actions"><a class="button secondary" href="{{ url_for('card') }}">View & print <span aria-hidden="true">↗</span></a><a class="download-link" href="{{ url_for('download') }}">Download .txt ↓</a></div><p class="preview-help">This card shows your last saved information.</p>{% else %}<p class="preview-help">Save your record to unlock printing and downloading.</p>{% endif %}
+    <div class="context-note"><span aria-hidden="true">ⓘ</span><p>This record helps communicate information. It does not determine whether a food or medicine is safe.</p></div>
+    {% if profile %}<form method="post" action="{{ url_for('reset') }}" id="reset-form"><input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"><button class="text-button delete-button" type="submit">Delete saved record</button></form>{% endif %}
+  </aside>
+</div>
+<section class="mission" id="mission"><p class="eyebrow">WHY ALLERGETIC EXISTS</p><div><h2>Everyone deserves<br>a way to be understood.</h2><p>Communicating an allergy isn’t always easy. Allergetic began with a simple idea: make the details easier to show, read, and share, including for people who find spoken communication difficult.</p><p>One personal record. A starting point for a clearer conversation.</p></div></section>
+{% endblock %}

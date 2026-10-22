@@ -1,0 +1,19 @@
+<article class="allergy-card" aria-label="Saved allergy card">
+  <div class="card-top"><span>ALLERGETIC / PERSONAL RECORD</span><span class="card-symbol" aria-hidden="true">✳</span></div>
+  {% if profile %}
+    <p class="card-label">THIS RECORD BELONGS TO</p><h2 class="card-name">{{ profile.name }}</h2>
+    <span class="source-tag">Self-reported</span>
+    <div class="card-rule"></div>
+    {% if profile.status == 'yes' %}
+      <p class="card-label">REPORTED ALLERGIES · {{ profile.allergies|length }}</p>
+      <ul class="card-allergies">{% for entry in profile.allergies %}<li><strong>{{ entry.allergen }}</strong><span>{{ entry.reaction or 'Reaction not recorded' }}</span></li>{% endfor %}</ul>
+    {% elif profile.status == 'no' %}<h3>No known allergies reported</h3><p class="card-description">This reflects the information entered by the record holder.</p>
+    {% else %}<h3>Allergy status unknown</h3><p class="card-description">The record holder is unsure about their allergies.</p>{% endif %}
+    <div class="card-bottom">Updated {{ profile.updated }}<br>Not independently verified.</div>
+  {% else %}
+    <p class="card-label">YOUR PERSONAL ALLERGY CARD</p><h2 class="card-name empty-name">A clearer way<br>to say it.</h2><div class="card-rule"></div>
+    <p class="card-description">Your name, reported allergies, and reaction notes will appear here once you save your record.</p>
+    <div class="empty-card-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="card-bottom">Ready when you are.</div>
+  {% endif %}
+</article>

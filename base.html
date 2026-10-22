@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Allergetic — a personal record to help communicate your allergies.">
+  <title>{% block title %}Allergetic · Your allergies, clearly communicated{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="{{ url_for('index') }}"><span class="brand-mark" aria-hidden="true">a<span>✳</span></span>allergetic<span class="brand-dot">.</span></a><nav aria-label="Main navigation"><a href="{{ url_for('index') }}#record">My record</a><a href="{{ url_for('index') }}#mission">Our mission</a><span class="local-label"><i></i> Local prototype</span></nav></header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer><a class="footer-brand" href="{{ url_for('index') }}">allergetic.</a><span>A little clarity. A more confident conversation.</span><span>Made for communication.</span></footer>
+</body>
+</html>

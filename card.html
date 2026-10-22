@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}Your allergy card · Allergetic{% endblock %}
+{% block content %}<section class="print-page"><div class="print-toolbar"><a class="download-link" href="{{ url_for('index') }}">← Back to my record</a><button type="button" class="button primary" id="print-button">Print / Save as PDF</button></div>{% include '_card.html' %}<p class="print-note">This self-reported record is not independently verified and does not determine whether a food or medicine is safe.</p></section>{% endblock %}
