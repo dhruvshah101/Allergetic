@@ -6,7 +6,7 @@ Allergetic is a beginner-friendly web application built with Python and Flask. U
 
 ## Why I built this
 
-Communicating allergies isn't always easy, especially for people who find spoken communication difficult. Inspired by the idea of an immunization docket, this project explores how a simple digital record can help people organize and communicate their reported allergies.
+Communicating allergies isn't always easy, especially for people who find spoken communication difficult, especially as an individual with severe allergies to all types of peanuts and tree nutsInspired by the idea of an immunization docket, this project explores how a simple digital record can help people organize and communicate their reported allergies.
 
 The project began as a Python command-line program that asked for a name and allergies. It has grown into a web application with an HTML/CSS frontend, interactive forms, and local database storage.
 
