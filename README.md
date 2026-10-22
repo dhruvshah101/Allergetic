@@ -10,6 +10,18 @@ Communicating allergies isn't always easy, especially for people who find spoken
 
 The project began as a Python command-line program that asked for a name and allergies. It has grown into a web application with an HTML/CSS frontend, interactive forms, and local database storage.
 
+## From a sixth-grade science fair to a college project
+
+I started Allergetic as a science fair project in sixth grade. The idea was to create an allergy docket, similar to an immunization record, that people could use to communicate their allergies.
+
+My original Python program asked for a name, asked whether the user had allergies, and printed their response. It was simple, but it gave me a starting point for turning an idea into working code.
+
+Now, as a college freshman exploring computer science and data science, I am revisiting the project and developing it into a Flask web application. The current version adds interactive forms, input validation, local storage, and a printable allergy card.
+
+I have included the [original Python prototype](history/original.py) to show where the project started. It is preserved as a learning artifact; the current app runs from `app.py`. 
+
+
+
 ## Features
 
 - Create and edit a personal allergy record.
@@ -99,6 +111,8 @@ allergetic/
 ├── requirements.txt        # Python dependencies
 ├── test_app.py             # Backend tests
 ├── README.md
+├── history/
+│   ├── original.py     # Original command-line prototype
 ├── templates/
 │   ├── base.html           # Shared page layout
 │   ├── index.html          # Record form and saved card
